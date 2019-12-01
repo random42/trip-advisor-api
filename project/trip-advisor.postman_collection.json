@@ -1,0 +1,637 @@
+{
+	"info": {
+		"_postman_id": "f1a0e665-ce97-46df-9fa8-e60c1e4ac29f",
+		"name": "trip-advisor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a06534b6-9a31-4a27-9e76-2264799aeaf7",
+						"exec": [
+							"tests['status 200'] = pm.response.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{user}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/user/register",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"register"
+					]
+				},
+				"description": "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of the request. The MIME \nType can be set using the ``Content-Type`` HTTP header. The most commonly used \nMIME types are:\n\n* `multipart/form-data`\n* `application/x-www-form-urlencoded`\n* `application/json`\n\nThis endpoint echoes the HTTP headers, request parameters, the contents of\nthe request body and the complete URI requested when data is sent as a form parameter."
+			},
+			"response": []
+		},
+		{
+			"name": "Login user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e32e819c-2862-40ae-a5cc-80912d250e41",
+						"exec": [
+							"tests['status 200'] = pm.response.code === 200;",
+							"",
+							"const res = pm.response.json();",
+							"",
+							"pm.collectionVariables.set('userId', res.user);",
+							"pm.collectionVariables.set('token', res.token);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "50d0e63d-bf75-429d-aa7e-93ca0edb02b0",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "{{user}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/user/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"login"
+					]
+				},
+				"description": "The HTTP `PUT` request method is similar to HTTP `POST`. It too is meant to \ntransfer data to a server (and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `PUT` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following \nraw HTTP request,\n\n> PUT /hi/there?hand=wave\n>\n> <request-body>\n\n\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Get restaurant",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5815f289-1c43-420e-a727-aa59f001262f",
+						"exec": [
+							"tests['status 200'] = pm.response.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/restaurant?id={{restaurantId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"restaurant"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{restaurantId}}"
+						}
+					]
+				},
+				"description": "The HTTP `GET` request method is meant to retrieve data from a server. The data\nis identified by a unique URI (Uniform Resource Identifier). \n\nA `GET` request can pass parameters to the server using \"Query String \nParameters\". For example, in the following request,\n\n> http://example.com/hi/there?hand=wave\n\nThe parameter \"hand\" has the value \"wave\".\n\nThis endpoint echoes the HTTP headers, request parameters and the complete\nURI requested."
+			},
+			"response": []
+		},
+		{
+			"name": "Get menus",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "79b46542-ab98-4318-9f2e-d85047479287",
+						"exec": [
+							"tests['status 200'] = pm.response.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/restaurant/menu?id={{restaurantId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"restaurant",
+						"menu"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{restaurantId}}"
+						}
+					]
+				},
+				"description": "The HTTP `GET` request method is meant to retrieve data from a server. The data\nis identified by a unique URI (Uniform Resource Identifier). \n\nA `GET` request can pass parameters to the server using \"Query String \nParameters\". For example, in the following request,\n\n> http://example.com/hi/there?hand=wave\n\nThe parameter \"hand\" has the value \"wave\".\n\nThis endpoint echoes the HTTP headers, request parameters and the complete\nURI requested."
+			},
+			"response": []
+		},
+		{
+			"name": "Get ratings",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "20044b92-1f25-4a64-97a7-80bd174846c5",
+						"exec": [
+							"tests['status 200'] = pm.response.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/restaurant/rating?id={{restaurantId}}&page=0",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"restaurant",
+						"rating"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{restaurantId}}"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						}
+					]
+				},
+				"description": "The HTTP `GET` request method is meant to retrieve data from a server. The data\nis identified by a unique URI (Uniform Resource Identifier). \n\nA `GET` request can pass parameters to the server using \"Query String \nParameters\". For example, in the following request,\n\n> http://example.com/hi/there?hand=wave\n\nThe parameter \"hand\" has the value \"wave\".\n\nThis endpoint echoes the HTTP headers, request parameters and the complete\nURI requested."
+			},
+			"response": []
+		},
+		{
+			"name": "Get feedbacks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "20044b92-1f25-4a64-97a7-80bd174846c5",
+						"exec": [
+							"tests['status 200'] = pm.response.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/restaurant/feedback?id={{restaurantId}}&page=0",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"restaurant",
+						"feedback"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{restaurantId}}"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						}
+					]
+				},
+				"description": "The HTTP `GET` request method is meant to retrieve data from a server. The data\nis identified by a unique URI (Uniform Resource Identifier). \n\nA `GET` request can pass parameters to the server using \"Query String \nParameters\". For example, in the following request,\n\n> http://example.com/hi/there?hand=wave\n\nThe parameter \"hand\" has the value \"wave\".\n\nThis endpoint echoes the HTTP headers, request parameters and the complete\nURI requested."
+			},
+			"response": []
+		},
+		{
+			"name": "Get opinions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "20044b92-1f25-4a64-97a7-80bd174846c5",
+						"exec": [
+							"tests['status 200'] = pm.response.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/restaurant/opinion?id={{restaurantId}}&page=0",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"restaurant",
+						"opinion"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{restaurantId}}"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						}
+					]
+				},
+				"description": "The HTTP `GET` request method is meant to retrieve data from a server. The data\nis identified by a unique URI (Uniform Resource Identifier). \n\nA `GET` request can pass parameters to the server using \"Query String \nParameters\". For example, in the following request,\n\n> http://example.com/hi/there?hand=wave\n\nThe parameter \"hand\" has the value \"wave\".\n\nThis endpoint echoes the HTTP headers, request parameters and the complete\nURI requested."
+			},
+			"response": []
+		},
+		{
+			"name": "Search restaurants",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "98c503c3-af80-4f6b-bf01-04589ce5e7be",
+						"exec": [
+							"tests['status 200'] = pm.response.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/restaurant/search?query=luna&page=0",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"restaurant",
+						"search"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "luna"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						}
+					]
+				},
+				"description": "The HTTP `GET` request method is meant to retrieve data from a server. The data\nis identified by a unique URI (Uniform Resource Identifier). \n\nA `GET` request can pass parameters to the server using \"Query String \nParameters\". For example, in the following request,\n\n> http://example.com/hi/there?hand=wave\n\nThe parameter \"hand\" has the value \"wave\".\n\nThis endpoint echoes the HTTP headers, request parameters and the complete\nURI requested."
+			},
+			"response": []
+		},
+		{
+			"name": "Write opinion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d2cf5b53-e7f7-42d8-8b0a-ddee62a23618",
+						"exec": [
+							"tests['status 200'] = pm.response.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "rating",
+							"value": "9",
+							"type": "text"
+						},
+						{
+							"key": "opinion",
+							"value": "Cibo molto buono!",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/restaurant/opinion?id={{restaurantId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"restaurant",
+						"opinion"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{restaurantId}}"
+						}
+					]
+				},
+				"description": "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of the request. The MIME \nType can be set using the ``Content-Type`` HTTP header. The most commonly used \nMIME types are:\n\n* `multipart/form-data`\n* `application/x-www-form-urlencoded`\n* `application/json`\n\nThis endpoint echoes the HTTP headers, request parameters, the contents of\nthe request body and the complete URI requested when data is sent as a form parameter."
+			},
+			"response": []
+		},
+		{
+			"name": "Book restaurant",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e7dad9f4-2009-4485-825b-9d046e33858d",
+						"exec": [
+							"tests['status 200'] = pm.response.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{host}}/restaurant/book?id={{restaurantId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"restaurant",
+						"book"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "{{restaurantId}}"
+						}
+					]
+				},
+				"description": "The HTTP `GET` request method is meant to retrieve data from a server. The data\nis identified by a unique URI (Uniform Resource Identifier). \n\nA `GET` request can pass parameters to the server using \"Query String \nParameters\". For example, in the following request,\n\n> http://example.com/hi/there?hand=wave\n\nThe parameter \"hand\" has the value \"wave\".\n\nThis endpoint echoes the HTTP headers, request parameters and the complete\nURI requested."
+			},
+			"response": []
+		},
+		{
+			"name": "Add restaurant to favourites",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "df674d29-d537-4ddb-a784-4054af657da3",
+						"exec": [
+							"tests['status 200'] = pm.response.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "restaurant",
+							"value": "{{restaurantId}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/user/favourite/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"favourite",
+						""
+					]
+				},
+				"description": "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of the request. The MIME \nType can be set using the ``Content-Type`` HTTP header. The most commonly used \nMIME types are:\n\n* `multipart/form-data`\n* `application/x-www-form-urlencoded`\n* `application/json`\n\nThis endpoint echoes the HTTP headers, request parameters, the contents of\nthe request body and the complete URI requested when data is sent as a form parameter."
+			},
+			"response": []
+		},
+		{
+			"name": "Remove restaurant from favourites",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "df674d29-d537-4ddb-a784-4054af657da3",
+						"exec": [
+							"tests['status 200'] = pm.response.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "restaurant",
+							"value": "{{restaurantId}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/user/favourite/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"favourite",
+						""
+					]
+				},
+				"description": "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of the request. The MIME \nType can be set using the ``Content-Type`` HTTP header. The most commonly used \nMIME types are:\n\n* `multipart/form-data`\n* `application/x-www-form-urlencoded`\n* `application/json`\n\nThis endpoint echoes the HTTP headers, request parameters, the contents of\nthe request body and the complete URI requested when data is sent as a form parameter."
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "6107d08c-c276-4ebc-94cb-0614921f438d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "fb9e7665-6647-422b-9959-b5325b1129b8",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "2bef45b3-ab8d-4165-a699-a2be2dde82f7",
+			"key": "host",
+			"value": "localhost:3000",
+			"type": "string"
+		},
+		{
+			"id": "3ed5bd5c-fb87-4727-9929-9cc104787c25",
+			"key": "token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "2a1d59ce-176e-4c9a-b7d8-04c46422f0db",
+			"key": "user",
+			"value": "random",
+			"type": "string"
+		},
+		{
+			"id": "e961a7f3-5eac-4fe5-abb4-7719eb26d152",
+			"key": "password",
+			"value": "qwerty123",
+			"type": "string"
+		},
+		{
+			"id": "cfe6d5c7-3653-4b72-b0bc-85339537de73",
+			"key": "restaurantId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"id": "b535451c-994c-403b-b480-e20080c5d2b7",
+			"key": "userId",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

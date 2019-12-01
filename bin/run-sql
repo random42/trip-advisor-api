@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+
+const { db } = require('../build/db')
+const fs = require('fs')
+
+const sql = fs.readFileSync(process.argv[2], 'utf8');
+
+run()
+.then(exit)
+.catch(abort)
+
+async function run() {
+  await db.connect();
+  await db.query(sql);
+}
+
+
+function exit() {
+  process.exit(0)
+}
+
+function abort(err) {
+  err && console.log(err)
+  process.exit(1)
+}

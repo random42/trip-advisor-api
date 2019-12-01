@@ -1,0 +1,61 @@
+{
+  "user": {
+    "id": "ID",
+    "username": "string",
+    "password": "string",
+    "favourites": ["ID"]
+  },
+
+  "restaurant": {
+    "id": "ID",
+    "name": "string",
+    "images": ["string"],
+    "tags": ["string"],
+    "foodNeeds": ["string"],
+    "averagePrice": "integer",
+    "maxDiscount": "integer",
+    "menu": {
+      "name": "string"
+      "lastModified": "date",
+      "entries": [
+        {
+          "id": "ID",
+          "name": "string",
+          "price": "float"
+        }
+      ]
+    },
+    "setMenus": [
+      {
+        "id": "ID",
+        "name": "string",
+        "description": "string",
+        "price": "float"
+      }
+    ],
+    "opinions": [
+      {
+        "user": "ID",
+        "rating": "integer",
+        "text": "string"
+      }
+    ],
+    "ratings": [
+      {
+        "user": "ID",
+        "rating": "integer"
+      }
+    ],
+    "feedbacks": [
+      {
+        "user": "ID",
+        "rating": "integer"
+      }
+    ],
+    "bookings": [
+      {
+        "user": "ID",
+      }
+    ]
+  }
+}

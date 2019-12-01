@@ -1,0 +1,81 @@
+{
+  "extends": ["tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": [
+      "./**/*.spec.ts"
+    ],
+    "format": "stylish"
+  },
+  "rules": {
+    // Fixable
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "public-static-field",
+          "public-static-method",
+          "protected-static-field",
+          "protected-static-method",
+          "private-static-field",
+          "private-static-method",
+          "public-instance-field",
+          "protected-instance-field",
+          "private-instance-field",
+          "public-constructor",
+          "protected-constructor",
+          "private-constructor",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method"
+        ]
+      }
+    ],
+    "no-return-await": true,
+    "no-string-throw": true,
+    "no-string-literal": true,
+    "no-var-keyword": true,
+    "static-this": true,
+
+    // Prefers and warns
+    "prefer-for-of": true,
+    "prefer-object-spread": true,
+    "prefer-conditional-expression": true,
+    "unified-signatures": true,
+    "await-promise": true,
+
+    // Rules
+    "triple-equals": true,
+    "no-empty": true,
+    "no-duplicate-super": true,
+    "no-duplicate-variable": true,
+    "no-eval": true,
+    "no-floating-promises": true,
+    "no-invalid-template-strings": true,
+    "no-invalid-this": false,
+    "no-parameter-reassignment": true,
+    "use-isnan": true,
+    "ban-comma-operator": true,
+    "no-bitwise": true,
+    "no-construct": true,
+    "no-tautology-expression": true,
+    "restrict-plus-operands": true,
+    "no-reference": true,
+
+    // Maintainability
+    "cyclomatic-complexity": true,
+    "deprecation": true,
+    "max-file-line-count": 3000,
+    "no-duplicate-imports": true,
+    "prefer-const": true,
+
+    // Style (some are fixable)
+    "array-type": [true, "array"],
+    "arrow-return-shorthand": true,
+    "class-name": true,
+    "encoding": true,
+    "file-name-casing": [true, "kebab-case"],
+    "interface-over-type-literal": true,
+    "no-redundant-jsdoc": true,
+    "prefer-method-signature": true
+  }
+}

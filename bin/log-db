@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+
+const { db } = require('../build/db')
+const { red } = require('chalk')
+
+const tables = ['user','restaurant','user_favourite','set_menu','menu_entry','rating','feedback','opinion','restaurant_tag','restaurant_image','restaurant_food_need','food_need','restaurant_booking']
+
+run()
+.then(exit)
+.catch(abort)
+
+async function run() {
+  await db.connect();
+  await db.useDb();
+  const data = await Promise.all(tables.map(t => {
+    return db.query(`SELECT * FROM ${t}`);
+  }))
+  for (let i in tables) {
+    console.log(red(tables[i]));
+    console.table(data[i]);
+  }
+}
+
+
+function exit() {
+  process.exit(0)
+}
+
+function abort(err) {
+  err && console.log(err)
+  process.exit(1)
+}
