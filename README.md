@@ -21,7 +21,7 @@ npm link
 # Compile
 npm run build
 ```
-### Configurate database
+### Configure database
 
 Set database configuration in the file `secret/db.json` without modifying the `database` field. Make sure your MySQL instance does not have a database named *trip_advisor*.
 
